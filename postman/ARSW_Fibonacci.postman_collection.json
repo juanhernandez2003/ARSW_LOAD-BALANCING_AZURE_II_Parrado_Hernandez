@@ -1,0 +1,52 @@
+{
+  "info": {
+    "name": "ARSW Fibonacci - Azure Function",
+    "description": "Peticion POST a la Azure Function de Fibonacci. Las variables URL, function y nth vienen del environment (o de --env-var en Newman).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Fibonacci nth",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200', function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "pm.test('Respuesta no vacia', function () {",
+              "    pm.expect(pm.response.text().length).to.be.above(0);",
+              "});",
+              "console.log('function=' + pm.variables.get('function') + ' | nth=' + pm.variables.get('nth') + ' | status=' + pm.response.code + ' | tiempo=' + pm.response.responseTime + ' ms');"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nth\": {{nth}}\n}"
+        },
+        "url": {
+          "raw": "{{URL}}/api/{{function}}",
+          "host": [
+            "{{URL}}"
+          ],
+          "path": [
+            "api",
+            "{{function}}"
+          ]
+        }
+      }
+    }
+  ]
+}
