@@ -1,0 +1,5 @@
+node_modules/
+FunctionProject/node_modules/
+local.settings.json
+# Reportes JSON de Newman (cada uno pesa ~4 MB); se conservan summary.csv y los .log
+postman/results/**/run-*.json
